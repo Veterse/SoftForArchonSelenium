@@ -23,6 +23,8 @@ urls = [
 
 
 ]
+brave_binary = r"C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe"
+brave_user_data = r"C:\Users\Денис\AppData\Local\BraveSoftware\Brave-Browser\User Data"
 
 # Функция для выполнения действий с профилем
 def run_actions(driver):
@@ -86,11 +88,11 @@ def run_actions(driver):
 
 if __name__ == "__main__":
     # Закрываем все процессы Chrome перед запуском
-    os.system("taskkill /im chrome.exe /f")
+    os.system("taskkill /im brave.exe /f")
     time.sleep(2)
         # вот все твои текущие профили profiles = ["Default" "Profile 1","Profile 2","Profile 3","profile 4","Profile 5","Profile 6","Profile 7"]
     # Список профилей пользователей
-    profiles = [ "Profile 7" ] 
+    profiles = [ "Default" ] 
     profile_path = r"C:\Users\Денис\AppData\Local\Google\Chrome\User Data"
 
     # Определяем элементы на странице
@@ -108,7 +110,8 @@ if __name__ == "__main__":
     for profile in profiles:
         # Настройка опций Chrome для каждого профиля
         options = uc.ChromeOptions()
-        options.add_argument(f"--user-data-dir={profile_path}")
+        options.binary_location = brave_binary  
+        options.add_argument(f"--user-data-dir={brave_user_data}")
         options.add_argument(f"--profile-directory={profile}")
         options.add_argument("--disable-blink-features=AutomationControlled")
         options.add_argument("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36")
