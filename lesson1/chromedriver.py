@@ -19,7 +19,12 @@ urls = [
     "https://testnet.funkybit.fun/memejam/coins/UNION%E2%80%A2NOSE%E2%80%A2MAN%E2%80%A2FOR%E2%80%A2U:bitcoin",
     "https://testnet.funkybit.fun/memejam/coins/REMA%E2%80%A2VS%E2%80%A2BUJU%E2%80%A2WHO%E2%80%A2IS%E2%80%A2BETTER:bitcoin",
     "https://testnet.funkybit.fun/memejam/coins/DAVECOIN%E2%80%A2G%E2%80%A2G%E2%80%A2G%E2%80%A2G%E2%80%A2G:bitcoin",
-    "https://testnet.funkybit.fun/memejam/coins/ANNETA%E2%80%A2KLINGER:bitcoin"
+    "https://testnet.funkybit.fun/memejam/coins/ANNETA%E2%80%A2KLINGER:bitcoin",
+    "https://funkybit.fun/memejam/coins/KAKARI%E2%80%A2PRIMEKKKK:bitcoin",
+    "https://funkybit.fun/memejam/coins/SERGRGRBGHEGRGRE:bitcoin",
+    "https://funkybit.fun/memejam/coins/BARIX%E2%80%A2BONZATIM:bitcoin",
+    "https://funkybit.fun/memejam/coins/REMOVE%E2%80%A2THE%E2%80%A2TRUMP:bitcoin"
+
 
 
 ]
@@ -28,6 +33,7 @@ brave_user_data = r"C:\Users\Денис\AppData\Local\BraveSoftware\Brave-Browse
 
 # Функция для выполнения действий с профилем
 def run_actions(driver):
+   
     # Ожидание и открытие сайта
     wait = WebDriverWait(driver, 60)
     
@@ -35,22 +41,27 @@ def run_actions(driver):
     print(getter)
     driver.get(getter)
     print("я открыл")
+    Main = driver.current_window_handle
 
     # Вводим "1" в поле ввода
     wait.until(EC.visibility_of_element_located(input_for_buy)).send_keys("1")
-
+    time.sleep(1)
     # Нажимаем кнопку "Place Trade"
     wait.until(EC.element_to_be_clickable(button_for_buy)).click()
+
     time.sleep(1)
     Okna = driver.window_handles
 
-    driver.switch_to.window(Okna[1])
+    driver.switch_to.window(Okna[2])
+    print(driver.current_url)
     
     #inputpassword = driver.find_element("xpath", "//input")
     inputer = ("xpath","//input")
     print("я перешёл туда")
     time.sleep(1)
+    print(Okna)
     wait.until(EC.visibility_of_element_located(inputer)).send_keys("123321qW.@##")
+    time.sleep(1)
     
     
 
@@ -60,30 +71,39 @@ def run_actions(driver):
 
     wait.until(EC.element_to_be_clickable(buttonAccessPassword)).click()
     print("клик прошёл успешно")
-    time.sleep(5)
+    time.sleep(3)
     Okna = driver.window_handles
-
+    time.sleep(1)
     driver.switch_to.window(Okna[2])
     wait.until(EC.element_to_be_clickable(ConfirmedPassword)).click()
     print("кошелёк подтверждён")
+    
+    
 
     for i in range(103):
-        driver.switch_to.window(Okna[0])
+        
+        driver.switch_to.window(Main)
+        print(driver.current_url)
+        time.sleep(2)
         wait.until(EC.visibility_of_element_located(input_for_buy)).clear()
-        time.sleep(2)
+        time.sleep(1)
+        
+       
+        
         wait.until(EC.visibility_of_element_located(input_for_buy)).send_keys("1")
-        time.sleep(2)
+        time.sleep(1)
         wait.until(EC.element_to_be_clickable(button_for_buy)).click()
-        time.sleep(2)
+        time.sleep(1)
         Okna = driver.window_handles
         print(i)
-        time.sleep(1)
+        
+        print(Okna)
         driver.switch_to.window(Okna[2])
         wait.until(EC.element_to_be_clickable(ConfirmedPassword)).click()
-        time.sleep(2)
+    
 
     # Даём время на выполнение действий
-    time.sleep(40)
+    time.sleep(15)
     driver.quit()
 
 if __name__ == "__main__":
@@ -92,11 +112,11 @@ if __name__ == "__main__":
     time.sleep(2)
         # вот все твои текущие профили profiles = ["Default" "Profile 1","Profile 2","Profile 3","profile 4","Profile 5","Profile 6","Profile 7"]
     # Список профилей пользователей
-    profiles = [ "Default" ] 
+    profiles = [ "Profile 1" ] 
     profile_path = r"C:\Users\Денис\AppData\Local\Google\Chrome\User Data"
 
     # Определяем элементы на странице
-    input_for_buy = ("xpath", "//input")
+    input_for_buy = ("xpath", "//input[@class='w-full px-3 py-2 rounded-2xl focus:outline-none border-0 focus:ring-0 py-3 text-white [appearance:textfield] placeholder:text-mutedText [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none bg-darkBackground5 text-left text-2xl']")
     button_for_buy = ("xpath", "//button[text() = 'Place Trade']")
     inputforPassword = ("xpath", "//input")
     
