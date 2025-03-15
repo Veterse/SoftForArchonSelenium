@@ -23,7 +23,9 @@ urls = [
     "https://funkybit.fun/memejam/coins/KAKARI%E2%80%A2PRIMEKKKK:bitcoin",
     "https://funkybit.fun/memejam/coins/SERGRGRBGHEGRGRE:bitcoin",
     "https://funkybit.fun/memejam/coins/BARIX%E2%80%A2BONZATIM:bitcoin",
-    "https://funkybit.fun/memejam/coins/REMOVE%E2%80%A2THE%E2%80%A2TRUMP:bitcoin"
+    "https://funkybit.fun/memejam/coins/REMOVE%E2%80%A2THE%E2%80%A2TRUMP:bitcoin",
+    "https://testnet.funkybit.fun/memejam/coins/SAJHDFEFEWIUFEHF:bitcoin",
+    "https://testnet.funkybit.fun/memejam/coins/LNKKKKKKKKKKKDHSJ:bitcoin"
 
 
 
@@ -32,8 +34,8 @@ brave_binary = r"C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.
 brave_user_data = r"C:\Users\Денис\AppData\Local\BraveSoftware\Brave-Browser\User Data"
 
 # Функция для выполнения действий с профилем
-def run_actions(driver):
-   
+def run_actions(driver,profile):
+    print(f"Сейчас активен : {profile}")
     # Ожидание и открытие сайта
     wait = WebDriverWait(driver, 60)
     
@@ -86,14 +88,14 @@ def run_actions(driver):
         print(driver.current_url)
         time.sleep(2)
         wait.until(EC.visibility_of_element_located(input_for_buy)).clear()
-        time.sleep(1)
+        time.sleep(0.5)
         
        
         
         wait.until(EC.visibility_of_element_located(input_for_buy)).send_keys("1")
-        time.sleep(1)
+        time.sleep(0.5)
         wait.until(EC.element_to_be_clickable(button_for_buy)).click()
-        time.sleep(1)
+        time.sleep(0.5)
         Okna = driver.window_handles
         print(i)
         
@@ -112,7 +114,7 @@ if __name__ == "__main__":
     time.sleep(2)
         # вот все твои текущие профили profiles = ["Default" "Profile 1","Profile 2","Profile 3","profile 4","Profile 5","Profile 6","Profile 7"]
     # Список профилей пользователей
-    profiles = [ "Profile 1" ] 
+    profiles = ["Profile 10","Profile 11","Profile 12" ] 
     profile_path = r"C:\Users\Денис\AppData\Local\Google\Chrome\User Data"
 
     # Определяем элементы на странице
@@ -138,7 +140,7 @@ if __name__ == "__main__":
 
         # Запуск браузера с текущим профилем
         driver = uc.Chrome(service=service, options=options)
-        run_actions(driver)
+        run_actions(driver,profile)
         time.sleep(2)
 
 
